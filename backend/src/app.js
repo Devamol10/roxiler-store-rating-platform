@@ -20,14 +20,17 @@ app.get("/health", (_req, res) => {
 });
 
 const adminRoutes = require("./routes/admin.routes");
+const authRoutes = require("./routes/auth.routes");
 const ratingRoutes = require("./routes/rating.routes");
+const storeOwnerRoutes = require("./routes/storeOwner.routes");
 const storeRoutes = require("./routes/store.routes");
 
 app.use("/api/admin", adminRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/ratings", ratingRoutes);
+app.use("/api/store-owner", storeOwnerRoutes);
 app.use("/api/stores", storeRoutes);
 
-// app.use("/api/auth", require("./routes/auth.routes"));
 app.use(errorHandler);
 
 module.exports = app;

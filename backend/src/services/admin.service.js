@@ -181,25 +181,46 @@ async function getStores(filters = {}) {
 
 async function createUser(payload) {
   const { name, email, password, address, role } = payload;
+
+  const existingUser = await prisma.user.findUnique({
+    where: { email },
+    select: { id: true },
+  });
+
+  if (existingUser) {
+    const error = new Error("Email already exists");
+    error.statusCode = 409;
+    throw error;
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  return prisma.user.create({
-    data: {
-      name,
-      email,
-      password: hashedPassword,
-      address,
-      role,
-    },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      address: true,
-      role: true,
-      createdAt: true,
-    },
-  });
+  try {
+    return await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        address,
+        role,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        address: true,
+        role: true,
+        createdAt: true,
+      },
+    });
+  } catch (error) {
+    if (error.code === "P2002" && error.meta?.target?.includes("email")) {
+      const conflictError = new Error("Email already exists");
+      conflictError.statusCode = 409;
+      throw conflictError;
+    }
+    throw error;
+  }
 }
 
 async function createStore(payload) {

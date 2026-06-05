@@ -50,6 +50,51 @@ async function createRating(userId, payload) {
   });
 }
 
+async function updateRating(userId, storeId, payload) {
+  const { rating } = payload;
+
+  const [store, existingRating] = await Promise.all([
+    prisma.store.findUnique({
+      where: { id: storeId },
+      select: { id: true },
+    }),
+    prisma.rating.findUnique({
+      where: {
+        userId_storeId: {
+          userId,
+          storeId,
+        },
+      },
+      select: { id: true },
+    }),
+  ]);
+
+  if (!store) {
+    const error = new Error("Store not found");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  if (!existingRating) {
+    const error = new Error("Rating not found for this store");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  await prisma.rating.update({
+    where: {
+      userId_storeId: {
+        userId,
+        storeId,
+      },
+    },
+    data: {
+      rating,
+    },
+  });
+}
+
 module.exports = {
   createRating,
+  updateRating,
 };

@@ -9,6 +9,14 @@ const createRatingValidator = [
     .withMessage("Rating must be an integer between 1 and 5"),
 ];
 
+const updateRatingValidator = [
+  body("rating")
+    .notEmpty()
+    .withMessage("Rating is required")
+    .isInt({ min: 1, max: 5 })
+    .withMessage("Rating must be an integer between 1 and 5"),
+];
+
 const validate = (req, res, next) => {
   const errors = validationResult(req);
 
@@ -27,5 +35,6 @@ const validate = (req, res, next) => {
 
 module.exports = {
   createRatingValidator,
+  updateRatingValidator,
   validate,
 };
