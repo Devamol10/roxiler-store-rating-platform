@@ -65,8 +65,6 @@ async function login(email, password) {
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
-  // Temporary debug log - remove after fixing
-  console.log(`[LOGIN DEBUG] email=${email}, hash_length=${user.password?.length}, hash_prefix=${user.password?.substring(0,20)}, match=${isPasswordValid}`);
   if (!isPasswordValid) {
     const error = new Error("Invalid email or password");
     error.statusCode = 401;
