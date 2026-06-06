@@ -12,15 +12,15 @@ async function seed() {
 
     // 1. Create Core Bypass Users (Admin, Store, User)
     const admin = await prisma.user.create({
-      data: { name: 'Siddharth Admin', email: 'admin@demo.com', password, role: 'ADMIN', address: 'Shivajinagar, Pune' },
+      data: { name: 'Amol Budhwant', email: 'amol.budhwant@roxiler.com', password, role: 'ADMIN', address: 'Shivajinagar, Pune' },
     });
 
     const storeOwnerBypass = await prisma.user.create({
-      data: { name: 'Demo Store Manager', email: 'store@demo.com', password, role: 'STORE_OWNER', address: 'FC Road, Pune' },
+      data: { name: 'Kasem Irani', email: 'manager@cafegoodluck.in', password, role: 'STORE_OWNER', address: 'FC Road, Pune' },
     });
 
     const userBypass = await prisma.user.create({
-      data: { name: 'Demo User', email: 'user@demo.com', password, role: 'USER', address: 'Kothrud, Pune' },
+      data: { name: 'Rahul Deshmukh', email: 'rahul.deshmukh@gmail.com', password, role: 'USER', address: 'Kothrud, Pune' },
     });
 
     // 2. Create 3 More Store Owners
@@ -34,7 +34,7 @@ async function seed() {
 
     // 3. Create 19 More Normal Users (making it 20 total users with userBypass)
     const userNames = [
-      'Rahul Deshmukh', 'Snehal Patil', 'Amit Joshi', 'Priya Sharma', 'Kunal Kadam',
+      'Snehal Patil', 'Amit Joshi', 'Priya Sharma', 'Kunal Kadam',
       'Neha Awate', 'Vikram Singh', 'Pooja Kulkarni', 'Saurabh Wagh', 'Aarti Kale',
       'Ramesh Jadhav', 'Kavita Mane', 'Rohan More', 'Swati Pawar', 'Ganesh Shinde',
       'Meera Gawali', 'Sagar Thorat', 'Anjali Bhat', 'Nikhil Bhosale'

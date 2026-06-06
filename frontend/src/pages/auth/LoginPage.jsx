@@ -54,13 +54,13 @@ function LoginPage() {
         Use the "Quick Access" buttons to test all 3 roles instantly.
       </div>
       <div style={{ display: "flex", gap: "10px", marginBottom: "var(--spacing-lg)", justifyContent: "center", flexWrap: "wrap" }}>
-        <button type="button" className="btn" style={{ padding: "8px 12px", fontSize: "0.85rem", backgroundColor: "#f3f4f6", color: "#374151", border: "1px solid #d1d5db" }} onClick={() => { setEmail("admin@demo.com"); setPassword("password123"); processLogin("admin@demo.com", "password123"); }} disabled={isLoading}>
+        <button type="button" className="btn" style={{ padding: "8px 12px", fontSize: "0.85rem", backgroundColor: "#f3f4f6", color: "#374151", border: "1px solid #d1d5db" }} onClick={() => { setEmail("amol.budhwant@roxiler.com"); setPassword("password123"); processLogin("amol.budhwant@roxiler.com", "password123"); }} disabled={isLoading}>
           Admin
         </button>
-        <button type="button" className="btn" style={{ padding: "8px 12px", fontSize: "0.85rem", backgroundColor: "#f3f4f6", color: "#374151", border: "1px solid #d1d5db" }} onClick={() => { setEmail("store@demo.com"); setPassword("password123"); processLogin("store@demo.com", "password123"); }} disabled={isLoading}>
+        <button type="button" className="btn" style={{ padding: "8px 12px", fontSize: "0.85rem", backgroundColor: "#f3f4f6", color: "#374151", border: "1px solid #d1d5db" }} onClick={() => { setEmail("manager@cafegoodluck.in"); setPassword("password123"); processLogin("manager@cafegoodluck.in", "password123"); }} disabled={isLoading}>
           Store
         </button>
-        <button type="button" className="btn" style={{ padding: "8px 12px", fontSize: "0.85rem", backgroundColor: "#f3f4f6", color: "#374151", border: "1px solid #d1d5db" }} onClick={() => { setEmail("user@demo.com"); setPassword("password123"); processLogin("user@demo.com", "password123"); }} disabled={isLoading}>
+        <button type="button" className="btn" style={{ padding: "8px 12px", fontSize: "0.85rem", backgroundColor: "#f3f4f6", color: "#374151", border: "1px solid #d1d5db" }} onClick={() => { setEmail("rahul.deshmukh@gmail.com"); setPassword("password123"); processLogin("rahul.deshmukh@gmail.com", "password123"); }} disabled={isLoading}>
           User
         </button>
       </div>
