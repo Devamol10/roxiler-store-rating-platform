@@ -65,6 +65,17 @@ const changePasswordValidator = [
     }),
 ];
 
+const updateProfileValidator = [
+  nameRules("name"),
+  body("address")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("Address cannot be empty if provided")
+    .isLength({ max: 400 })
+    .withMessage("Address must be at most 400 characters"),
+];
+
 const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -83,5 +94,6 @@ module.exports = {
   signupValidator,
   loginValidator,
   changePasswordValidator,
+  updateProfileValidator,
   validate,
 };

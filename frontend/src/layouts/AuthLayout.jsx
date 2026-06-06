@@ -13,20 +13,23 @@ function AuthLayout() {
   }
 
   return (
-    <div style={{ 
-      minHeight: "100vh", 
-      display: "flex", 
-      alignItems: "center", 
-      justifyContent: "center",
-      background: "linear-gradient(135deg, var(--primary-light) 0%, var(--bg-body) 100%)"
-    }}>
-      <div style={{ width: "100%", maxWidth: "420px", padding: "var(--spacing-md)" }}>
-        <div style={{ textAlign: "center", marginBottom: "var(--spacing-xl)" }}>
-          <h1 style={{ color: "var(--primary)", fontSize: "2rem", marginBottom: "var(--spacing-xs)" }}>Roxiler</h1>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.875rem" }}>Store Rating Platform</p>
-        </div>
-        <div className="card" style={{ padding: "var(--spacing-xl)" }}>
-          <Outlet />
+    <div style={{ minHeight: "100vh", backgroundColor: "var(--bg-body)", display: "flex", flexDirection: "column" }}>
+      {/* Flipkart-style Yellow-Blue Header Bar */}
+      <div style={{
+        background: "linear-gradient(135deg, #2874F0 0%, #1a5dc8 60%, #FFB800 100%)",
+        padding: "var(--spacing-xl) var(--spacing-xl)",
+        textAlign: "center"
+      }}>
+        <h1 style={{ color: "#FFFFFF", fontSize: "2.5rem", fontWeight: "700", marginBottom: "0.25rem", letterSpacing: "-0.5px" }}>Roxiler</h1>
+        <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.9rem", fontWeight: "500" }}>Store Rating Platform</p>
+      </div>
+
+      {/* Card below the header */}
+      <div style={{ flex: 1, display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "var(--spacing-xl) var(--spacing-md)" }}>
+        <div style={{ width: "100%", maxWidth: "440px" }}>
+          <div className="card" style={{ padding: "var(--spacing-xl)", boxShadow: "var(--shadow-lg)", border: "none" }}>
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

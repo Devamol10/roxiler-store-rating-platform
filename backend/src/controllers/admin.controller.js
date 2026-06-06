@@ -1,6 +1,13 @@
 const adminService = require("../services/admin.service");
 const { HTTP_STATUS, ROLES } = require("../constants");
 
+/**
+ * admin.controller.js
+ * Handles HTTP requests for all System Administrator endpoints.
+ * These routes are protected - only ADMIN role users can access them.
+ */
+
+// GET /api/admin/dashboard - Returns total user, store, and rating counts
 async function getDashboardStats(_req, res, next) {
   try {
     const data = await adminService.getDashboardStats();
@@ -13,6 +20,7 @@ async function getDashboardStats(_req, res, next) {
   }
 }
 
+// GET /api/admin/users - Returns user list, supports filters via query params
 async function getUsers(req, res, next) {
   try {
     const data = await adminService.getUsers(req.query);
@@ -25,6 +33,7 @@ async function getUsers(req, res, next) {
   }
 }
 
+// GET /api/admin/users/:id - Returns full user details; for store owners, includes average rating
 async function getUserById(req, res, next) {
   try {
     const user = await adminService.getUserById(req.params.id);
@@ -83,6 +92,7 @@ async function getUserById(req, res, next) {
   }
 }
 
+// GET /api/admin/stores - Returns store list with computed average ratings
 async function getStores(req, res, next) {
   try {
     const stores = await adminService.getStores(req.query);
@@ -114,6 +124,7 @@ async function getStores(req, res, next) {
   }
 }
 
+// POST /api/admin/users - Admin creates a new user with an assignable role
 async function createUser(req, res, next) {
   try {
     const data = await adminService.createUser(req.body);
@@ -126,6 +137,7 @@ async function createUser(req, res, next) {
   }
 }
 
+// POST /api/admin/stores - Admin creates a new store and assigns it to a STORE_OWNER user
 async function createStore(req, res, next) {
   try {
     const data = await adminService.createStore(req.body);

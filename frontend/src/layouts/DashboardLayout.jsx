@@ -43,8 +43,13 @@ function DashboardLayout() {
         position: "fixed",
         top: 0, bottom: 0, left: 0
       }}>
-        <div style={{ padding: "var(--spacing-xl) var(--spacing-lg)", borderBottom: "1px solid var(--border-light)" }}>
-          <h2 style={{ margin: 0, color: "var(--primary)", fontSize: "1.5rem" }}>Roxiler</h2>
+        <div style={{ 
+          padding: "var(--spacing-lg) var(--spacing-lg)", 
+          background: "linear-gradient(135deg, #2874F0, #1a5dc8)",
+          borderBottom: "3px solid var(--accent)"
+        }}>
+          <h2 style={{ margin: 0, color: "#FFFFFF", fontSize: "1.5rem", fontWeight: "700" }}>Roxiler</h2>
+          <p style={{ margin: 0, color: "rgba(255,255,255,0.7)", fontSize: "0.7rem", marginTop: "2px" }}>Store Rating Platform</p>
         </div>
         
         <nav style={{ flex: 1, padding: "var(--spacing-lg) var(--spacing-md)", overflowY: "auto" }}>
@@ -99,8 +104,8 @@ function DashboardLayout() {
         {/* Top Header */}
         <header style={{ 
           height: "var(--header-height)", 
-          backgroundColor: "var(--bg-surface)", 
-          borderBottom: "1px solid var(--border-light)",
+          background: "linear-gradient(135deg, #2874F0 0%, #1a5dc8 100%)",
+          borderBottom: "3px solid var(--accent)",
           display: "flex", 
           justifyContent: "flex-end", 
           alignItems: "center", 
@@ -111,10 +116,10 @@ function DashboardLayout() {
         }}>
           <div className="flex-row">
             <div style={{ textAlign: "right" }}>
-              <div style={{ fontWeight: "600", fontSize: "0.875rem" }}>{user?.name}</div>
-              <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "capitalize" }}>{user?.role.replace('_', ' ').toLowerCase()}</div>
+              <div style={{ fontWeight: "600", fontSize: "0.875rem", color: "#FFFFFF" }}>{user?.name}</div>
+              <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.7)", textTransform: "capitalize" }}>{user?.role.replace('_', ' ').toLowerCase()}</div>
             </div>
-            <button className="btn btn-outline" style={{ padding: "0.375rem 0.75rem" }} onClick={handleLogout}>Logout</button>
+            <button className="btn" style={{ padding: "0.375rem 0.75rem", backgroundColor: "var(--accent)", color: "#212121", fontWeight: "600", border: "none" }} onClick={handleLogout}>Logout</button>
           </div>
         </header>
 

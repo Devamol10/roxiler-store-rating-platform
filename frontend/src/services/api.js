@@ -1,8 +1,15 @@
 import axios from "axios";
 
+/**
+ * api.js
+ * Centralized Axios instance for making HTTP requests to the backend.
+ * Handles the base URL and ensures cookies (like our JWT) are sent with every request.
+ */
+
 const api = axios.create({
+  // Use Vercel's env variable in production, fallback to localhost for development
   baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api",
-  withCredentials: true,
+  withCredentials: true, // Crucial for sending/receiving httpOnly cookies
   headers: {
     "Content-Type": "application/json",
   },

@@ -1,5 +1,13 @@
 const prisma = require("../config/db");
 
+/**
+ * store.service.js
+ * Business logic for the Normal User's store browsing experience.
+ * Fetches stores from DB and computes overall ratings and the user's own rating.
+ */
+
+// Get all stores with search (name/address) and sorting support
+// Also calculates the overall rating and the current user's submitted rating
 async function getStoresForUser(userId, filters = {}) {
   const { name, address, sortBy = "name", sortOrder = "asc" } = filters;
   const where = {
@@ -37,6 +45,7 @@ async function getStoresForUser(userId, filters = {}) {
     },
   });
 
+  // Transform the raw DB data: compute average rating and find the user's own rating
   const mappedStores = stores.map((store) => {
     const totalRatings = store.ratings.length;
     const overallRating = totalRatings
@@ -58,6 +67,7 @@ async function getStoresForUser(userId, filters = {}) {
     };
   });
 
+  // Sort the final array in memory since ratings are computed fields (not in DB directly)
   mappedStores.sort((a, b) => {
     let valA = a[sortBy];
     let valB = b[sortBy];

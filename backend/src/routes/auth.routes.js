@@ -5,6 +5,7 @@ const {
   signupValidator,
   loginValidator,
   changePasswordValidator,
+  updateProfileValidator,
   validate,
 } = require("../validators/auth.validator");
 
@@ -19,6 +20,13 @@ router.patch(
   changePasswordValidator,
   validate,
   authController.changePassword
+);
+router.patch(
+  "/profile",
+  authenticate,
+  updateProfileValidator,
+  validate,
+  authController.updateProfile
 );
 
 module.exports = router;

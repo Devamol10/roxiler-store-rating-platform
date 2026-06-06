@@ -1,5 +1,12 @@
 const prisma = require("../config/db");
 
+/**
+ * storeOwner.service.js
+ * Business logic for the Store Owner's dashboard.
+ * Fetches the store's average rating and the list of users who have rated it.
+ */
+
+// Get the store's dashboard summary: store name, average rating, and total number of ratings
 async function getDashboard(userId) {
   const store = await prisma.store.findFirst({
     where: {
@@ -38,6 +45,7 @@ async function getDashboard(userId) {
   };
 }
 
+// Get a list of users who have rated this owner's store, with sorting support
 async function getRatings(userId, { sortBy = "name", sortOrder = "asc" } = {}) {
   const store = await prisma.store.findFirst({
     where: {
@@ -71,6 +79,7 @@ async function getRatings(userId, { sortBy = "name", sortOrder = "asc" } = {}) {
     throw error;
   }
 
+  // Sort by rating directly on the Rating table, or by user fields via relation
   let orderBy = {};
   if (sortBy === "rating") {
     orderBy = { rating: sortOrder };

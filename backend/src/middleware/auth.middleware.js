@@ -2,6 +2,14 @@ const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../config/env");
 const { HTTP_STATUS } = require("../constants");
 
+/**
+ * auth.middleware.js
+ * Contains two key middleware functions:
+ * - authenticate: Verifies the JWT from cookie/header and attaches user to req
+ * - authorize: Checks if the authenticated user has the required role(s)
+ */
+
+// Checks for a valid JWT in cookies (web) or Authorization header (API clients)
 function authenticate(req, res, next) {
   const authHeader = req.headers.authorization;
   const bearerToken = authHeader?.startsWith("Bearer ")
@@ -27,6 +35,7 @@ function authenticate(req, res, next) {
   }
 }
 
+// Role-based access control â€” used as middleware on protected routes like /admin/*
 function authorize(...allowedRoles) {
   return (req, res, next) => {
     if (!req.user || !allowedRoles.includes(req.user.role)) {

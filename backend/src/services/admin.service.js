@@ -2,6 +2,13 @@ const bcrypt = require("bcryptjs");
 const prisma = require("../config/db");
 const { ROLES } = require("../constants");
 
+/**
+ * admin.service.js
+ * Business logic for all System Administrator operations.
+ * Covers dashboard stats, user/store management, and data retrieval.
+ */
+
+// Fetch total counts for the admin dashboard overview panel
 async function getDashboardStats() {
   const [totalUsers, totalStores, totalRatings] = await Promise.all([
     prisma.user.count(),
@@ -16,6 +23,7 @@ async function getDashboardStats() {
   };
 }
 
+// Fetch all users with optional filters (name, email, address, role) and sorting
 async function getUsers(filters = {}) {
   const { name, email, address, role, sortBy = "name", sortOrder = "asc" } =
     filters;
@@ -79,6 +87,7 @@ async function getUsers(filters = {}) {
   });
 }
 
+// Fetch a single user's full detail - if they are a Store Owner, include their store ratings
 async function getUserById(userId) {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -113,6 +122,7 @@ async function getUserById(userId) {
   return user;
 }
 
+// Fetch all stores with optional filters and sorting. Includes rating data via relation.
 async function getStores(filters = {}) {
   const { name, email, address, sortBy = "name", sortOrder = "asc" } = filters;
   const allowedSortFields = ["name", "email"];
@@ -179,6 +189,7 @@ async function getStores(filters = {}) {
   });
 }
 
+// Admin creates a new user (can assign any role: USER, STORE_OWNER, or ADMIN)
 async function createUser(payload) {
   const { name, email, password, address, role } = payload;
 
@@ -223,9 +234,11 @@ async function createUser(payload) {
   }
 }
 
+// Admin creates a new store and links it to an existing STORE_OWNER user
 async function createStore(payload) {
   const { name, email, address, ownerId } = payload;
 
+  // Validate that the provided ownerId actually belongs to a STORE_OWNER role user
   const owner = await prisma.user.findFirst({
     where: {
       id: ownerId,
