@@ -6,9 +6,15 @@ import axios from "axios";
  * Handles the base URL and ensures cookies (like our JWT) are sent with every request.
  */
 
+let baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+if (baseUrl && !baseUrl.endsWith('/api')) {
+  // Automatically append /api if it's missing from the environment variable
+  baseUrl = baseUrl.replace(/\/$/, '') + '/api';
+}
+
 const api = axios.create({
   // Use Vercel's env variable in production, fallback to localhost for development
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api",
+  baseURL: baseUrl,
   withCredentials: true, // Crucial for sending/receiving httpOnly cookies
   headers: {
     "Content-Type": "application/json",
