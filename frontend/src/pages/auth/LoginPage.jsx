@@ -79,7 +79,7 @@ function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
             disabled={isLoading}
-            placeholder="you@example.com"
+            placeholder="enter email"
           />
         </div>
         
