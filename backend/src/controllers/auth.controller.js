@@ -30,9 +30,9 @@ async function login(req, res, next) {
     // Store the JWT in a cookie instead of localStorage for better security
     res.cookie("token", token, {
       httpOnly: true, // Prevents JavaScript from reading the cookie (XSS protection)
-      secure: process.env.NODE_ENV === "production", // Only send over HTTPS in prod
+      secure: true, // Required for cross-origin (SameSite=None)
       maxAge: 24 * 60 * 60 * 1000, // 1 day
-      sameSite: "lax",
+      sameSite: "none", // Required for cross-origin requests from Vercel to Render
     });
 
     return res.status(HTTP_STATUS.OK || 200).json({
@@ -49,8 +49,8 @@ async function logout(req, res, next) {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
     });
 
     return res.status(HTTP_STATUS.OK || 200).json({
