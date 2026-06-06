@@ -49,15 +49,18 @@ function LoginPage() {
       <h2 style={{ marginBottom: "var(--spacing-lg)", textAlign: "center", color: "var(--text-main)" }}>Welcome back</h2>
       {error && <div className="alert alert-error">{error}</div>}
 
+      <div style={{ textAlign: "center", marginBottom: "8px", color: "var(--text-muted)", fontSize: "0.875rem" }}>
+        Use the "Quick Access" buttons to test all 3 roles instantly.
+      </div>
       <div style={{ display: "flex", gap: "10px", marginBottom: "var(--spacing-lg)", justifyContent: "center", flexWrap: "wrap" }}>
         <button type="button" className="btn" style={{ padding: "8px 12px", fontSize: "0.85rem", backgroundColor: "#f3f4f6", color: "#374151", border: "1px solid #d1d5db" }} onClick={() => { setEmail("admin@demo.com"); setPassword("password123"); processLogin("admin@demo.com", "password123"); }} disabled={isLoading}>
-          Demo Admin
+          Admin
         </button>
         <button type="button" className="btn" style={{ padding: "8px 12px", fontSize: "0.85rem", backgroundColor: "#f3f4f6", color: "#374151", border: "1px solid #d1d5db" }} onClick={() => { setEmail("store@demo.com"); setPassword("password123"); processLogin("store@demo.com", "password123"); }} disabled={isLoading}>
-          Demo Store
+          Store
         </button>
         <button type="button" className="btn" style={{ padding: "8px 12px", fontSize: "0.85rem", backgroundColor: "#f3f4f6", color: "#374151", border: "1px solid #d1d5db" }} onClick={() => { setEmail("user@demo.com"); setPassword("password123"); processLogin("user@demo.com", "password123"); }} disabled={isLoading}>
-          Demo User
+          User
         </button>
       </div>
 
