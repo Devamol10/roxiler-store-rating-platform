@@ -18,7 +18,7 @@ A full-stack web application that allows users to submit ratings for registered 
 
 ---
 
-## 🚀 Features & User Roles
+##  Features & User Roles
 
 The platform implements a single, unified login system that dynamically routes users to their specific dashboards based on their role:
 
