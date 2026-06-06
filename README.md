@@ -4,7 +4,17 @@ A full-stack web application that allows users to submit ratings for registered 
 
 ### 🌐 Live Demo
 - **Frontend (Vercel):** [https://roxiler-store-rating-platform.vercel.app](https://roxiler-store-rating-platform.vercel.app)
-- **Backend (Render):** Hosted on Render (Note: First API request might take 30-50 seconds as Render spins up the free tier server).
+- **Backend (Render):** Hosted on Render
+
+### 🔑 Test Login Credentials
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | `amol.budhwant@roxiler.com` | `password123` |
+| Store Owner | `manager@cafegoodluck.in` | `password123` |
+| Normal User | `rahul.deshmukh@gmail.com` | `password123` |
+
+> You can also use the **Quick Access** buttons on the login page to instantly log in with any role.
 
 ---
 
@@ -35,56 +45,6 @@ The platform implements a single, unified login system that dynamically routes u
 - **Store Browsing:** Can view a sortable list of all stores registered on the platform.
 - **Rating System:** Can submit a rating (1 to 5) for any store. Can also modify their previously submitted ratings.
 - **Profile:** Can update their personal details (Name and Address).
-
----
-
-## 🛠️ Local Development Setup
-
-Follow these instructions to run the project locally.
-
-### Prerequisites
-- Node.js (v16 or higher)
-- PostgreSQL database
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/Devamol10/roxiler-store-rating-platform.git
-cd roxiler-store-rating-platform
-```
-
-### 2. Backend Setup
-```bash
-cd backend
-npm install
-```
-Create a `.env` file in the `backend` directory and add the following variables:
-```env
-DATABASE_URL="postgresql://username:password@localhost:5432/your_db_name"
-JWT_SECRET="your_super_secret_jwt_key"
-PORT=5000
-FRONTEND_URL="http://localhost:5173"
-NODE_ENV="development"
-```
-Run database migrations and start the server:
-```bash
-npx prisma migrate dev --name init
-npm run dev
-```
-
-### 3. Frontend Setup
-Open a new terminal window:
-```bash
-cd frontend
-npm install
-```
-Create a `.env` file in the `frontend` directory:
-```env
-VITE_API_BASE_URL="http://localhost:5000/api"
-```
-Start the development server:
-```bash
-npm run dev
-```
 
 ---
 
