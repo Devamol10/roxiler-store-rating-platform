@@ -1,7 +1,7 @@
 const prisma = require("../config/db");
 
 async function getStoresForUser(userId, filters = {}) {
-  const { name, address } = filters;
+  const { name, address, sortBy = "name", sortOrder = "asc" } = filters;
   const where = {
     ...(name
       ? {
@@ -23,8 +23,9 @@ async function getStoresForUser(userId, filters = {}) {
 
   const stores = await prisma.store.findMany({
     where,
-    orderBy: { name: "asc" },
+
     select: {
+      id: true,
       name: true,
       address: true,
       ratings: {
@@ -36,7 +37,7 @@ async function getStoresForUser(userId, filters = {}) {
     },
   });
 
-  return stores.map((store) => {
+  const mappedStores = stores.map((store) => {
     const totalRatings = store.ratings.length;
     const overallRating = totalRatings
       ? Number(
@@ -49,12 +50,33 @@ async function getStoresForUser(userId, filters = {}) {
     const userRatingRecord = store.ratings.find((rating) => rating.userId === userId);
 
     return {
+      id: store.id,
       name: store.name,
       address: store.address,
       overallRating,
       userRating: userRatingRecord ? userRatingRecord.rating : null,
     };
   });
+
+  mappedStores.sort((a, b) => {
+    let valA = a[sortBy];
+    let valB = b[sortBy];
+
+    if (valA === valB) return 0;
+
+    if (valA === null) valA = -1;
+    if (valB === null) valB = -1;
+
+    // Convert strings to lowercase for case-insensitive sorting
+    if (typeof valA === "string") valA = valA.toLowerCase();
+    if (typeof valB === "string") valB = valB.toLowerCase();
+
+    if (valA < valB) return sortOrder === "asc" ? -1 : 1;
+    if (valA > valB) return sortOrder === "asc" ? 1 : -1;
+    return 0;
+  });
+
+  return mappedStores;
 }
 
 module.exports = {

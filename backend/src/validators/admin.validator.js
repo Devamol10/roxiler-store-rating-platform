@@ -4,7 +4,7 @@ const { ROLES } = require("../constants");
 const PASSWORD_UPPERCASE = /[A-Z]/;
 const PASSWORD_SPECIAL = /[!@#$%^&*(),.?":{}|<>_\-+=[\]\\/'`~]/;
 
-const assignableRoles = [ROLES.USER, ROLES.STORE_OWNER];
+const assignableRoles = [ROLES.USER, ROLES.STORE_OWNER, ROLES.ADMIN];
 
 const createUserValidator = [
   body("name")
