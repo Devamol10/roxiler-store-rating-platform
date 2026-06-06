@@ -1,6 +1,19 @@
+# General
+node_modules/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log
+
+# Backend
 backend/node_modules/
 backend/.env
 backend/generated/
+
+# Frontend
 frontend/node_modules/
-Readme.md/
-*.log
+frontend/dist/
+frontend/dist-ssr/
+frontend/.env
+frontend/.env.local
